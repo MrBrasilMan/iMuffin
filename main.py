@@ -5,16 +5,16 @@
 ### Startup ###
 ###############
 
-try:
-  import sys
-  import requests
-  import os
-  import parser
-except:
-  print ("error (1): install sys, requests, and os modules using pip\n if this problem persists, make sure parser.py is included with your installation.")
+#try:
+import sys
+import requests
+import os
+import parser
+#except:
+ # print ("error (1): install sys, requests, and os modules using pip\n if this problem persists, make sure parser.py is included with your installation and has no issues.")
 #Starting variables
 url = "home"
-version = 0.2
+version = "0.2.1"
 
 
 
@@ -36,7 +36,7 @@ while True:
   if url == "home":
     print ("iMuffin Home Page")
     print ("Thanks for trying out iMuffin Aplha!")
-    print ("You are running version " + str(version))
+    print ("You are running version " + version)
   #A failure page if things happen to go wrong loading the URL
   elif url == "error":
     print ("Uh Oh\nMalformed request")
@@ -51,8 +51,13 @@ while True:
 ### Request Handling ###
 ########################
 
+
+#This is where we load the website
   else:
+#First, print plain text here.
     print (parser.rm_p(wanted.text))
+#Then add the links down at the end of the page.
+    print (parser.link_s(wanted.text))
   url = input(">")
   #Pass if the url is equal to home(the page render will render this)
   if url == "home":
