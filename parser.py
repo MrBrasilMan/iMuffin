@@ -30,7 +30,7 @@ def link_list(possiblelinkbody):
   #For all charecters in the body
   for char in allchar:
     #If the letter is a(processes before removing possible href)
-    if char == "a" and possible_href == True:
+    if char.lower() == "a" and possible_href == True:
       is_href = True
     #Only scans one line looking for a, shuts down if it is not on the second one.
     if possible_href == True:
@@ -46,3 +46,141 @@ def link_list(possiblelinkbody):
       text_list.append(char)
   str1 = ""
   return str1.join(text_list)
+
+
+########################
+###### FIND SCRIPT #####
+########################
+
+
+def is_script(forg_body):
+  body = list (forg_body)
+  blength = len(body)
+  counter = -1
+  ammount_found = 0
+  #Has to be minus 1 to account for number lag
+  while blength-1 != counter:
+    counter += 1
+    if body[counter] == "<":
+      if body[counter + 1] != "/":
+        if body[counter + 1] == "s":
+          if body[counter + 2] == "c":
+            ammount_found += 1
+  return ammount_found
+
+def remove_script(forg_body):
+  #This function finially works after about a day. I will try to document this as best as I can
+  #Turning into a list
+  body = list (forg_body)
+  #Must be offset because I screwed up a little somewhere.
+  counter = -1
+  #Getting the length
+  blength = len(body)
+  #Text to return in a list
+  new_text = []
+  #If the text is determined not to be any text
+  if is_script(forg_body) != 0:
+    #If the list is not over
+    while blength-1 != counter:
+      #Increase the counter
+      counter += 1
+      just_finished_sa = False
+      #If this starting line is False
+      if body[counter] == "<":
+        if body[counter + 1] != "/":
+          if body[counter + 1] == "s":
+            if body[counter + 2] == "c":
+              #Stop adding
+              stop_adding = True
+              while stop_adding:
+                #Pass through them unless it's the end />, and then skip by eight to remove </script>
+                counter += 1
+                if body[counter] == "<":
+                  if body[counter + 1] == "/":
+                    stop_adding = False
+                    counter = counter + 8
+                    just_finished_sa = True
+      #If this is not a recent removal of js
+      if just_finished_sa != True:
+        #Just add the charecter to a list
+        new_text.append(body[counter])
+    #Return it to a string
+    str1 = ""
+    return str1.join(new_text)
+  #Otherwise, return the body of the console
+  else:
+    return forg_body
+########################
+#### FIND STYLE ########
+########################
+def is_style(forg_body):
+  body = list (forg_body)
+  blength = len(body)
+  counter = -1
+  ammount_found = 0
+  #Has to be minus 1 to account for number lag
+  while blength-1 != counter:
+    counter += 1
+    if body[counter] == "<":
+      if body[counter + 1] != "/":
+        if body[counter + 1] == "s":
+          if body[counter + 2] == "t":
+            ammount_found += 1
+  return ammount_found
+def remove_style(forg_body):
+  #This function finially works after about a day. I will try to document this as best as I can
+  #Turning into a list
+  body = list (forg_body)
+  #Must be offset because I screwed up a little somewhere.
+  counter = -1
+  #Getting the length
+  blength = len(body)
+  #Text to return in a list
+  new_text = []
+  #If the text is determined not to be any text
+  if is_style(forg_body) != 0:
+    #If the list is not over
+    while blength-1 != counter:
+      #Increase the counter
+      counter += 1
+      just_finished_sa = False
+      #If this starting line is False
+      if body[counter] == "<":
+        if body[counter + 1] != "/":
+          if body[counter + 1] == "s":
+            if body[counter + 2] == "t":
+              print ("foudn style")
+              #Stop adding
+              stop_adding = True
+              while stop_adding:
+                #Pass through them unless it's the end />, and then skip by eight to remove </script>
+                counter += 1
+                if body[counter] == "<":
+                  if body[counter + 1] == "/":
+                    stop_adding = False
+                    counter = counter + 6
+                    just_finished_sa = True
+      #If this is not a recent removal of js
+      if just_finished_sa != True:
+        #Just add the charecter to a list
+        new_text.append(body[counter])
+    #Return it to a string
+    str1 = ""
+    return str1.join(new_text)
+  #Otherwise, return the body of the console
+  else:
+    return forg_body
+####################
+### PARSING TEXT ###
+####################
+
+def the_parse(forg_body):
+  if is_script(forg_body) == 0:
+    return rm_p(forg_body)
+  else:
+    parsed_of_js = remove_script(forg_body)
+    parsed_of_htm = rm_p(parsed_of_js)
+    parsed_of_css = remove_style(parsed_of_htm)
+    final = parsed_of_css
+    return final
+    

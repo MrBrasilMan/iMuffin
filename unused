@@ -1,0 +1,32 @@
+def test(stringtoreplace):
+  chars = list(stringtoreplace)
+  #Starts at negative one because of list indexes starting at 0
+  counter = -1
+  list_len = len(chars)
+  #Must be set up here to stop all <script> counting
+  con_count = False
+  tosend = []
+  stop = False
+  #For all charecters
+  while stop == False:
+    #Increase the counter at 1
+    counter = counter + 1
+    #If the charecter is equal to <
+    if counter >= list_len:
+      if chars[counter] == "<":
+        #If the next two charecters spell out sc (so <sc in <script>)
+          if chars[counter + 1] == "s" and chars[counter + 2] == "c" and con_count != True: 
+            #This is uqual passed
+              print ("reached match")
+              con_count = True
+              print (con_count)
+      #If the script is going on
+      if con_count == True:
+          print ("flag 1")
+          #Until /> is matched, continue
+          while con_count:
+            print (counter)
+            print (chars[counter])
+            counter = counter + 1
+            if chars[counter] == ">" and chars[counter - 7] == "/":
+              con_count = False

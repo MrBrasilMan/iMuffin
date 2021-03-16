@@ -10,14 +10,14 @@ import sys
 import requests
 import os
 import parser
+print (parser.the_parse("<script>lolwutyou bird</script> hey <p>test</p>"))
 #except:
  # print ("error (1): install sys, requests, and os modules using pip\n if this problem persists, make sure parser.py is included with your installation and has no issues.")
 #Starting variables
 url = "home"
-version = "0.3.0"
+version = "0.3.5"
 releaseinfo = "Added links to webpages!"
-minorpatchinfo = "No minor patches"
-
+minorpatchinfo = "Allows for older website links to work"
 #############
 ## Main #####
 ############
@@ -61,7 +61,7 @@ while True:
     print (parser.rm_p(wanted.text))
 #Then add the links down at the end of the page.
     print ("\n___________________________________\n\t\t\t\tLinks")
-    print (parser.link_list(wanted.text))
+    print (parser.the_parse(wanted.text))
   url = input(">")
   #Pass if the url is equal to home(the page render will render this)
   if url == "home":
