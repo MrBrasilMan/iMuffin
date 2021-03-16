@@ -10,12 +10,12 @@ import sys
 import requests
 import os
 import parser
-print (parser.remove_style("<style>lolwutyou bird</style> hey <p>test</p>"))
 #except:
  # print ("error (1): install sys, requests, and os modules using pip\n if this problem persists, make sure parser.py is included with your installation and has no issues.")
 #Starting variables
+print (parser.remove_style(""))
 url = "home"
-version = "0.3.6"
+version = "0.4"
 releaseinfo = "Added JS filtering"
 minorpatchinfo = "Style filtering to be added soon."
 #############

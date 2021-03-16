@@ -170,11 +170,9 @@ def remove_style(forg_body):
 ####################
 
 def the_parse(forg_body):
-  if is_script(forg_body) == 0:
-    return rm_p(forg_body)
-  else:
     parsed_of_js = remove_script(forg_body)
-    parsed_of_htm = rm_p(parsed_of_js)
-    parsed_of_css = remove_style(parsed_of_htm)
-    final = parsed_of_css
+    #Do all tag related items last, rm_p removes tags but not text
+    parsed_of_css = remove_style(parsed_of_js)
+    parsed_of_htm = rm_p(parsed_of_css)
+    final = parsed_of_htm
     return final
