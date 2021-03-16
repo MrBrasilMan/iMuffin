@@ -10,14 +10,14 @@ import sys
 import requests
 import os
 import parser
-print (parser.the_parse("<script>lolwutyou bird</script> hey <p>test</p>"))
+print (parser.remove_style("<style>lolwutyou bird</style> hey <p>test</p>"))
 #except:
  # print ("error (1): install sys, requests, and os modules using pip\n if this problem persists, make sure parser.py is included with your installation and has no issues.")
 #Starting variables
 url = "home"
-version = "0.3.5"
-releaseinfo = "Added links to webpages!"
-minorpatchinfo = "Allows for older website links to work"
+version = "0.3.6"
+releaseinfo = "Added JS filtering"
+minorpatchinfo = "Style filtering to be added soon."
 #############
 ## Main #####
 ############
@@ -58,10 +58,10 @@ while True:
 #This is where we load the website
   else:
 #First, print plain text here.
-    print (parser.rm_p(wanted.text))
+    print (parser.the_parse(wanted.text))
 #Then add the links down at the end of the page.
     print ("\n___________________________________\n\t\t\t\tLinks")
-    print (parser.the_parse(wanted.text))
+    print (parser.link_list(wanted.text))
   url = input(">")
   #Pass if the url is equal to home(the page render will render this)
   if url == "home":

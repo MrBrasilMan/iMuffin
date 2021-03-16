@@ -138,9 +138,8 @@ def remove_style(forg_body):
   #Text to return in a list
   new_text = []
   #If the text is determined not to be any text
-  if is_style(forg_body) != 0:
-    #If the list is not over
-    while blength-1 != counter:
+  #If the list is not over
+  while blength-1 != counter:
       #Increase the counter
       counter += 1
       just_finished_sa = False
@@ -149,7 +148,6 @@ def remove_style(forg_body):
         if body[counter + 1] != "/":
           if body[counter + 1] == "s":
             if body[counter + 2] == "t":
-              print ("foudn style")
               #Stop adding
               stop_adding = True
               while stop_adding:
@@ -158,18 +156,15 @@ def remove_style(forg_body):
                 if body[counter] == "<":
                   if body[counter + 1] == "/":
                     stop_adding = False
-                    counter = counter + 6
+                    counter = counter + 7
                     just_finished_sa = True
       #If this is not a recent removal of js
       if just_finished_sa != True:
         #Just add the charecter to a list
         new_text.append(body[counter])
     #Return it to a string
-    str1 = ""
-    return str1.join(new_text)
-  #Otherwise, return the body of the console
-  else:
-    return forg_body
+  str1 = ""
+  return str1.join(new_text)
 ####################
 ### PARSING TEXT ###
 ####################
@@ -183,4 +178,3 @@ def the_parse(forg_body):
     parsed_of_css = remove_style(parsed_of_htm)
     final = parsed_of_css
     return final
-    
