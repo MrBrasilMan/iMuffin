@@ -1,5 +1,5 @@
 #By Lucas Frias 2021
-#Please read.me for license and other info
+#Please the license for license and other info
 #iMuffin aims to be a quick, lightweight browser portable to most Linux/Unix systems
 ###############
 ### Startup ###
@@ -15,9 +15,9 @@ except:
 #Starting variables
 url = "home"
 title = "home"
-version = "0.4.1"
+version = "0.4.2"
 releaseinfo = "Text only-update (no style or script in the way.)"
-minorpatchinfo = "Fixed clear and blank pages"
+minorpatchinfo = "Added a license."
 #############
 ## Main #####
 ############
