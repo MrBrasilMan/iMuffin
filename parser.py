@@ -16,7 +16,7 @@ def rm_p(toparse):
     #Add chars if add to string is true (will ingore > because exception)
     elif add_to_string == True and letter != ">":
       toreturn = toreturn + letter
-  return toreturn
+  return toreturn.replace("\n", "\t")
 def link_list(possiblelinkbody):
   #This was a very complex function to write, and even I do not fully understand how it works. But it does (somewhat) and I am here to document it.
   #First, get a list of functions
@@ -41,6 +41,7 @@ def link_list(possiblelinkbody):
     #If the line ends, stop.
     if char == ">" and is_href == True:
       is_href = False
+      text_list.append("\n")
     #Otherwise display the link for the person.
     if is_href == True:
       text_list.append(char)
@@ -176,3 +177,25 @@ def the_parse(forg_body):
     parsed_of_htm = rm_p(parsed_of_css)
     final = parsed_of_htm
     return final
+###############################
+######## GET TITLE ############
+###############################
+def get_title(thebody):
+  body = list(thebody)
+  lbody = len(body)
+  counter = -1
+  while counter-1 != lbody:
+    counter = counter + 1
+    if body[coutner] == "<":
+      if body[counter + 1] == "t":
+        if body[counter + 2] == "i":
+          if body[counter + 3] == "t":
+            if body[counter + 4] == "l":
+              counter = counter + 7
+              title_not_collected = True
+              while title_not_collected:
+                counter = counter + 1
+                if body[counter] == "/":
+                  if body[counter -1] == "<":
+                    title_not_collected = False
+                    pass

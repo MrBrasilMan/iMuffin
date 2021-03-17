@@ -5,25 +5,25 @@
 ### Startup ###
 ###############
 
-#try:
-import sys
-import requests
-import os
-import parser
-#except:
- # print ("error (1): install sys, requests, and os modules using pip\n if this problem persists, make sure parser.py is included with your installation and has no issues.")
+try:
+  import sys
+  import requests
+  import os
+  import parser
+except:
+ print ("error (1): install sys, requests, and os modules using pip\n if this problem persists, make sure parser.py is included with your installation and has no issues.")
 #Starting variables
-print (parser.remove_style(""))
 url = "home"
-version = "0.4"
-releaseinfo = "Added JS filtering"
-minorpatchinfo = "Style filtering to be added soon."
+title = "home"
+version = "0.4.1"
+releaseinfo = "Text only-update (no style or script in the way.)"
+minorpatchinfo = "Fixed clear and blank pages"
 #############
 ## Main #####
 ############
 while True:
   #Bar
-  print ("iMuffin - " + url)
+  print ("iMuffin - " + title)
   print ("-----------------------------")
   #Main display
   #This is home, which will display some home starting text
@@ -48,6 +48,10 @@ while True:
       print ("Response: " + wanted.status_code)
     except:
       print ("No Response Sent. Is it a valid URL?")
+  elif url == "clear":
+    os.system("clear")
+  elif url == "":
+    pass
 
 
 #########################
@@ -66,10 +70,21 @@ while True:
   #Pass if the url is equal to home(the page render will render this)
   if url == "home":
     pass
+    title = "Home"
+  if url == "clear":
+    title = "clear"
+    os.system("clear")
+  if url == "":
+    title = ""
   else:
     #Try and get the webpage if the user does not go to home
     try:
       wanted = requests.get(url)
+      title = url
     except:
+      pages = ["home", "clear", ""]
+      #Makes sure it is not a pre-existing page.
+      if url not in pages:
       #Otherwise display the error page. For now, we don't really care what the error is. We set this as the url so the web render does not have to deal with an empty object
-      url = "error"
+        url = "error"
+        title = url
